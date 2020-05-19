@@ -36,6 +36,6 @@ spock = "0.1.0"
 name = "gadget_range_proof"
 harness = false
 
-#[[bench]]
-#name = "builtin_range_proof"
-#harness = false
+[[bench]]
+name = "builtin_range_proof"
+harness = false
