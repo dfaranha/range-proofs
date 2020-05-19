@@ -3,6 +3,8 @@ extern crate curve25519_dalek;
 extern crate merlin;
 extern crate bulletproofs;
 
+// Range proof using the native bulletproofs interface
+
 use curve25519_dalek::scalar::Scalar;
 use rand::thread_rng;
 use merlin::Transcript;

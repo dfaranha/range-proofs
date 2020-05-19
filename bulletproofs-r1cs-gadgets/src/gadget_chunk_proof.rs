@@ -17,6 +17,8 @@ fn count_bits(number: u64) -> usize {
     return used_bits as usize
 }
 
+// Chunk proof using the R1CS bulletproofs interface
+
 #[cfg(test)]
 mod tests {
     use super::*;

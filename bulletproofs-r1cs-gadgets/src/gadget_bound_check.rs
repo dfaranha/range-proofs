@@ -14,6 +14,7 @@ use std::cmp;
 
 use crate::r1cs_utils::{AllocatedQuantity, positive_no_gadget, constrain_lc_with_scalar};
 
+// An alternative range proof using the R1CS bulletproofs interface. To be refined/tested/benchmarked later.
 
 pub fn bound_check_gadget<CS: ConstraintSystem>(
     cs: &mut CS,

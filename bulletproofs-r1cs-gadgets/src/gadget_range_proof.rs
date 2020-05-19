@@ -17,6 +17,8 @@ fn count_bits(number: u64) -> usize {
     return used_bits as usize
 }
 
+// Range proof using the R1CS bulletproofs interface
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -29,7 +31,7 @@ mod tests {
 
         let mut rng: OsRng = OsRng::default();
         let min = 0;
-        let max = 1 << 16;
+        let max = (1u128 << 64 - 1) as u64;
 
         let v = rng.gen_range(min, max);
         println!("v is {}", &v);
