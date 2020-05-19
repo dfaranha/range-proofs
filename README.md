@@ -74,3 +74,7 @@ At the time of this writing, I am still unable to get the basic approach describ
 
 I keep getting a mal-formed verification key error when trying to do the individual bit proofs, which I can trace to the `bellman` crate, but cannot debug further.
 This is harder due to a less mature codebase, without many examples and supporting documentation.
+
+## Notes
+
+I had to install the `nightly` version of the Rust toolchain to be able to build the `bulletproof` crate with the features required for the above. In particular, it depends on the `develop` branch to collect statistics about number of R1CS constraints. I could not make the `avx2_backend` work in my machine, although it promises better performance.
