@@ -30,22 +30,21 @@ mod tests {
         use rand::Rng;
 
         let mut rng: OsRng = OsRng::default();
-        let min = 0;
-        let max = (1u128 << 64 - 1) as u64;
+        let max = ((1u64 << 16) - 1) as u64;
 
-        let v = rng.gen_range(min, max);
+        let v = rng.gen_range(0, max);
         println!("v is {}", &v);
-        assert!(range_proof_helper(v, min, max).is_ok());
+        assert!(range_proof_helper(v, max).is_ok());
     }
 
-    fn range_proof_helper(v: u64, min: u64, max: u64) -> Result<(), R1CSError> {
+    fn range_proof_helper(v: u64, max: u64) -> Result<(), R1CSError> {
         let pc_gens = PedersenGens::default();
-        let bp_gens = BulletproofGens::new(128, 1);
+        let bp_gens = BulletproofGens::new(64, 1);
 
         let n = count_bits(max);
         println!("bit_size is {}", &n);
 
-        let a = v - min;
+        let a = v;
         let b = max - v;
         println!("a, b are {} {}", &a, &b);
 
@@ -69,18 +68,18 @@ mod tests {
             comms.push(com_a);
 
             // Constrain b in [0, 2^n)
-            let (com_b, var_b) = prover.commit(b.into(), Scalar::random(&mut rng));
+            /*let (com_b, var_b) = prover.commit(b.into(), Scalar::random(&mut rng));
             let quantity_b = AllocatedQuantity {
                 variable: var_b,
                 assignment: Some(b),
             };
             assert!(positive_no_gadget(&mut prover, quantity_b, n).is_ok());
-            comms.push(com_b);
+            comms.push(com_b);*/
 
             // Constrain a+b to be same as max-min. This ensures same v is used in both commitments (`com_a` and `com_b`)
-            constrain_lc_with_scalar(&mut prover, var_a + var_b, &(max-min).into());
+            //constrain_lc_with_scalar(&mut prover, var_a + var_b, &(max).into());
 
-            println!("For {} in ({}, {}), no of constraints is {}", v, min, max, &prover.num_constraints());
+            println!("For {} in ({}, {}), no of constraints is {}", v, 0, max, &prover.num_constraints());
             println!("Prover commitments {:?}", &comms);
             let proof = prover.prove(&bp_gens)?;
 
@@ -100,16 +99,16 @@ mod tests {
         };
         assert!(positive_no_gadget(&mut verifier, quantity_a, n).is_ok());
 
-        let var_b = verifier.commit(commitments[1]);
+        /*let var_b = verifier.commit(commitments[1]);
         let quantity_b = AllocatedQuantity {
             variable: var_b,
             assignment: None,
         };
-        assert!(positive_no_gadget(&mut verifier, quantity_b, n).is_ok());
+        assert!(positive_no_gadget(&mut verifier, quantity_b, n).is_ok());*/
 
         println!("Verifier commitments {:?}", &commitments);
 
-        constrain_lc_with_scalar(&mut verifier, var_a + var_b, &(max-min).into());
+        //constrain_lc_with_scalar(&mut verifier, var_a + var_b, &(max).into());
 
         // Verifier verifies proof
         Ok(verifier.verify(&proof, &pc_gens, &bp_gens)?)
