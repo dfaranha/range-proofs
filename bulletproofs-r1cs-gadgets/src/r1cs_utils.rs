@@ -37,7 +37,7 @@ pub fn positive_no_gadget<CS: ConstraintSystem>(
         // Enforce that a = 1 - b, so they both are 1 or 0.
         cs.constrain(a + (b - 1u64));
 
-        constraint_v.push((b, exp_2)  );
+        constraint_v.push((b, exp_2));
         exp_2 = exp_2 + exp_2;
     }
 
