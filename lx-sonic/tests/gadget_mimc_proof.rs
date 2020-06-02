@@ -13,7 +13,7 @@ use lx_sonic::helped::adaptor::AdaptorCircuit;
 use lx_sonic::helped::{Proof, MultiVerifier};
 use lx_sonic::polynomials::Polynomial;
 
-pub const MIMC_ROUNDS: usize = 64;
+pub const MIMC_ROUNDS: usize = 322;
 
 /// This is an implementation of MiMC, specifically a
 /// variant named `LongsightF322p3` for BLS12-381.

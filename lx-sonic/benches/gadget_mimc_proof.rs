@@ -245,8 +245,9 @@ fn mimc_1_prove_wo_advice(c: &mut Criterion) {
     let srs_alpha = Fr::from_str("23728792").unwrap();
 
     let srs = SRS::<Bls12>::dummy(830564, srs_x, srs_alpha);
+	let label = format!("R1CS MiMC proof {} rounds", &MIMC_ROUNDS);
 
-    c.bench_function("create proof", move |b| {
+    c.bench_function(&label, move |b| {
         // This may not be cryptographically safe, use
         // `OsRng` (for example) in production software.
         let rng = &mut thread_rng();
@@ -283,10 +284,11 @@ criterion_group! {
 fn mimc_1_verify_wo_advice(c: &mut Criterion) {
     let srs_x = Fr::from_str("23923").unwrap();
     let srs_alpha = Fr::from_str("23728792").unwrap();
+	let label = format!("R1CS MiMC verify {} rounds", &MIMC_ROUNDS);
 
     let srs = SRS::<Bls12>::dummy(830564, srs_x, srs_alpha);
 
-    c.bench_function("Verify proof", move |b| {
+    c.bench_function(&label, move |b| {
         // This may not be cryptographically safe, use
         // `OsRng` (for example) in production software.
         let rng = &mut thread_rng();

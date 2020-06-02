@@ -84,7 +84,7 @@ impl<'a, E: Engine> Circuit<E> for RangeProofDemo<E> {
 	        );
 
 			//constraint_v.push((a, exp_2));
-			let mut tmp2 = exp_2;
+			let tmp2 = exp_2;
 			exp_2.add_assign(&tmp2);
 			if a_value == 1 {
 				exp_2.add_assign(&E::Fr::one());
@@ -119,7 +119,7 @@ fn range_proof_prover(c: &mut Criterion) {
 	let min = 0;
 	let max = ((1u64 << 16) - 1) as u64;
 
-	c.bench_function("create proof", move |b| {
+	c.bench_function("Create range proof", move |b| {
         // This may not be cryptographically safe, use
         // `OsRng` (for example) in production software.
         let rng = &mut thread_rng();
@@ -153,7 +153,7 @@ fn range_proof_verifier(c: &mut Criterion) {
 	let min = 0;
 	let max = ((1u64 << 16) - 1) as u64;
 
-    c.bench_function("Verify proof", move |b| {
+    c.bench_function("Verify range proof", move |b| {
         // This may not be cryptographically safe, use
         // `OsRng` (for example) in production software.
         let rng = &mut thread_rng();
