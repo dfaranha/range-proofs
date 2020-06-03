@@ -79,7 +79,7 @@ mod tests {
             // Constrain a+b to be same as max-min. This ensures same v is used in both commitments (`com_a` and `com_b`)
             //constrain_lc_with_scalar(&mut prover, var_a + var_b, &(max).into());
 
-            println!("For {} in ({}, {}), no of constraints is {}", v, 0, max, &prover.num_constraints());
+            println!("For {} in ({}, {}), no of constraints is {}, no of gates is {}", v, 0, max, &prover.num_constraints(), &prover.num_multipliers());
             println!("Prover commitments {:?}", &comms);
             let proof = prover.prove(&bp_gens)?;
 
