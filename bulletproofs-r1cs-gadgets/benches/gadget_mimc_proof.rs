@@ -185,9 +185,6 @@ fn verify_mimcproof_helper(c: &mut Criterion) {
     c.bench_function(
         &label,
         |b| {
-            let pc_gens = PedersenGens::default();
-            let bp_gens = BulletproofGens::new(128, 1);
-
 			let mut test_rng: StdRng = SeedableRng::from_seed([24u8; 32]);
 
 		    // Generate the MiMC round constants
@@ -205,7 +202,7 @@ fn verify_mimcproof_helper(c: &mut Criterion) {
 			let (proof, commitments) = mimc_prover(&pc_gens, &bp_gens, xl, xr, &constants, &image).unwrap();
 
             b.iter(|| {
-                mimc_proof_verifier(&proof, &commitments, &pc_gens, &bp_gens, &constants, &image);
+                mimc_proof_verifier(&proof, &commitments, &pc_gens, &bp_gens, &constants, &image).unwrap();
             })
         },
     );
