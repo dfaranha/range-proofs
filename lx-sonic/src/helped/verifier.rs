@@ -119,7 +119,7 @@ impl<E: Engine, C: Circuit<E>, S: SynthesisDriver, R: Rng> MultiVerifier<E, C, S
         t_zy.mul_assign(&proof.r_z1);
         t_zy.sub_assign(&k_y);
 
-        // Open up proof.t_comm and proof.r_comm at z by keeping thier commitments
+        // Open up proof.t_comm and proof.r_comm at z by keeping their commitments
         // linearly independent.
         {
             let mut random: E::Fr = self.randommness.gen();

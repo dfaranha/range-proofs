@@ -14,7 +14,7 @@ clear_on_drop = "0.2"
 crossbeam = "0.7"
 
 [dev-dependencies]
-criterion = "0.2"
+criterion = "0.3"
 
 [[bench]]
 name = "gadget_mimc_proof"
