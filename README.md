@@ -1,13 +1,13 @@
 # Range Proofs
 This repository has tests and benchmarks for range proofs in multiple proof systems.
-There are tests and benchmarked for values ranging from 8 bits to 64 bits, implemented in different ways.
+There are tests and benchmarks for values ranging from 8 bits to 64 bits, implemented in different ways.
 
-We follow the classical approach to prove that a value `x` is such that `0 ≤ x ≤ 2ⁿ` for some power of 2.
+We follow the classical approach to prove that a value `x` is such that `0 ≤ x < 2ⁿ` for some power of 2.
 A more detailed description can be found [here](https://github.com/lovesh/bulletproofs-r1cs-gadgets). There are many such examples there, with accompannying code for illustration.
 
 ## General Approach
 
-The prover must satisfy 2 statements, `x ≥ 0` and `x ≤ 2ⁿ`. The second is equivalent to proving that `2ⁿ - x >= 0`, so both
+The prover must satisfy 2 statements, `x ≥ 0` and `x < 2ⁿ`. The second is equivalent to proving that `2ⁿ - x >= 0`, so both
 can be actually done by proving that a value `v` lies in an interval `[0, max]` given commitments to `v` and `max - v`.
 In both cases, the prover creates a bit-representation of `v` with `n` bits, so `v` must be in `[0, 2ⁿ)`.
 
