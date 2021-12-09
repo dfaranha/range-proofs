@@ -9,3 +9,4 @@ pub mod gadget_range_proof;
 pub mod gadget_chunk_proof;
 pub mod builtin_range_proof;
 pub mod gadget_mimc_proof;
+pub mod gadget_sha256_proof;
